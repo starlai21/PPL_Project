@@ -9,7 +9,7 @@ import java.io.Reader;
 public class Main {
 	public static void main(String[] args) throws IOException, LexicalAnalysisException {
 		try {
-			File file = new File("/Users/jj/Downloads/YCP_Scheme-1/src/scheme/test.txt");
+			File file = new File("test.txt");
 			FileInputStream in=new FileInputStream (file); 
 			Reader reader = new InputStreamReader(in);
 			//Reader reader = new InputStreamReader(System.in);
