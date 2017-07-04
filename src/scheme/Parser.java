@@ -23,20 +23,19 @@ public class Parser {
 
 		Nonterminal s = new Nonterminal(SymbolType.S);
 
-		s.addChild(parseEXPRS());
+		s.addChild(parseEXPRS(false));
 
 		return s;
 	}
 
-	private Symbol parseEXPRS() throws IOException, LexicalAnalysisException, ParserException {
+	private Symbol parseEXPRS(boolean calledByParseList) throws IOException, LexicalAnalysisException, ParserException {
 
 		Nonterminal exprs = new Nonterminal(SymbolType.EXPRS);
 
 		Token t = lexer.peek();
-		if (t != null && t.getSymbolType() != SymbolType.RPAREN) {
-			// lexer.putBack(t);
+		if (t != null && ((t.getSymbolType() != SymbolType.RPAREN && calledByParseList) || !calledByParseList)) {
 			exprs.addChild(parseEXPR());
-			exprs.addChild(parseEXPRS());
+			exprs.addChild(parseEXPRS(calledByParseList));
 		}
 
 		return exprs;
@@ -56,9 +55,11 @@ public class Parser {
 			expr.addChild(t);
 		} else if (t.getSymbolType() == SymbolType.STRING_LITERAL) {
 			expr.addChild(t);
-		} else {
+		} else if (t.getSymbolType() == SymbolType.LPAREN) {
 			lexer.putBack(t);
 			expr.addChild(parseLIST());
+		} else {
+			throw new ParserException("At line " + t.getLineNum() + ": get unexpected input : " + t.getLexeme());
 		}
 
 		return expr;
@@ -69,7 +70,7 @@ public class Parser {
 		Nonterminal list = new Nonterminal(SymbolType.LIST);
 
 		list.addChild(expect(SymbolType.LPAREN));
-		list.addChild(parseEXPRS());
+		list.addChild(parseEXPRS(true));
 		list.addChild(expect(SymbolType.RPAREN));
 
 		return list;
