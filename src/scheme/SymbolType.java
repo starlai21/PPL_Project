@@ -11,7 +11,7 @@ public enum SymbolType {
 //	LAMBDA_KEYWORD(true),
 //	IF_KEYWORD(true),
 //	LET_KEYWORD(true),
-//	DEFINE_KEYWORD(true),
+	DEFINE_KEYWORD(true),
 //	AND_KEYWORD(true),
 //	OR_KEYWORD(true),
 //	NOT_KEYWORD(true),

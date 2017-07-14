@@ -1,5 +1,7 @@
-(define sum (lambda (x y) (+ x y)))
-(eqv? 'Calorie 'calorie)
-(define xyz 9)
-
-
+(define a 1)
+(define b 2)
+(+ 3 4 a b)
+(* a 3)
+(define a 4)
+(* a 3)
+(cons a '(b c))

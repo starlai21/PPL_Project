@@ -44,12 +44,17 @@ public class Token implements Symbol {
 	
 	@Override
 	public Symbol getChild(int index) {
-		throw new IndexOutOfBoundsException();
+	        throw new IndexOutOfBoundsException();
 	}
-	
+
 	@Override
 	public int getNumChildren() {
-		return 0;
+	        return 0;
+	}
+
+	@Override
+	public void addChild(Symbol child) {
+	        throw new UnsupportedOperationException("Can't add children to a Token");
 	}
 	
 	@Override

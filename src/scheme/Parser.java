@@ -22,7 +22,7 @@ public class Parser {
 		// root of the parse tree
 
 		Nonterminal s = new Nonterminal(SymbolType.S);
-
+		s.addChild(parseEXPR());
 		s.addChild(parseEXPRS(false));
 
 		return s;
@@ -49,11 +49,8 @@ public class Parser {
 		if (t.getSymbolType() == SymbolType.PRIME) {
 			expr.addChild(t);
 			expr.addChild(parseEXPR());
-		} else if (t.getSymbolType() == SymbolType.IDENTIFIER) {
-			expr.addChild(t);
-		} else if (t.getSymbolType() == SymbolType.INTEGER_LITERAL) {
-			expr.addChild(t);
-		} else if (t.getSymbolType() == SymbolType.STRING_LITERAL) {
+		} else if (t.getSymbolType() == SymbolType.IDENTIFIER || t.getSymbolType() == SymbolType.DEFINE_KEYWORD
+				|| t.getSymbolType() == SymbolType.INTEGER_LITERAL || t.getSymbolType() == SymbolType.STRING_LITERAL) {
 			expr.addChild(t);
 		} else if (t.getSymbolType() == SymbolType.LPAREN) {
 			lexer.putBack(t);
