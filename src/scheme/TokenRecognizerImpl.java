@@ -37,7 +37,7 @@ public class TokenRecognizerImpl implements TokenRecognizer {
 		new TokenPattern(Pattern.compile("^\\("), SymbolType.LPAREN),
 		new TokenPattern(Pattern.compile("^\\)"), SymbolType.RPAREN),
 		new TokenPattern(Pattern.compile("^[0-9]+\\b"), SymbolType.INTEGER_LITERAL),
-		new TokenPattern(Pattern.compile("\"(.*?)\""), SymbolType.STRING_LITERAL),
+		new TokenPattern(Pattern.compile("^\"(.*?)\""), SymbolType.STRING_LITERAL),
 		new TokenPattern(Pattern.compile("^([a-zA-Z]|!|\\$|%|&|\\*|/|:|<|=|>|\\?|\\^|_|~|\\+|-)([a-zA-Z]|!|\\$|%|&|\\*|/|:|<|=|>|\\?|\\^|_|~|\\+|-|[0-9])*"), SymbolType.IDENTIFIER),
 		new TokenPattern(Pattern.compile("'"), SymbolType.PRIME),
 		new TokenPattern(Pattern.compile("^define\\b"), SymbolType.DEFINE_KEYWORD),

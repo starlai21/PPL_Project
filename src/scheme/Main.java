@@ -46,7 +46,7 @@ public class Main {
 	private static final boolean PRINT_PARSE_TREE = Boolean.getBoolean("scheme.printparsetree");
 
 	public static void main(String[] args) throws IOException, LexicalAnalysisException {
-		try {
+		try {			
 			File file = new File("test.txt");
 			FileInputStream in = new FileInputStream(file);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));

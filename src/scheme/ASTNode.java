@@ -36,6 +36,9 @@ public class ASTNode implements TreeNode<ASTNode> {
 	public ASTNode getChild(int index) {
 		return childList.get(index);
 	}
+	public void removeChild(int index){
+		childList.remove(index);
+	}
 	
 	public void addChild(ASTNode child) {
 		childList.add(child);

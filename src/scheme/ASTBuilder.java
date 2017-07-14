@@ -13,7 +13,7 @@ public class ASTBuilder {
 			return buildEXPR(parseTree);
 		case LIST:
 			return buildLIST(parseTree);
-		case PRIME:
+		// case PRIME:
 		case IDENTIFIER:
 			return buildIDENTIFIER((Token) parseTree);
 		case INTEGER_LITERAL:
@@ -54,11 +54,27 @@ public class ASTBuilder {
 	}
 
 	private ASTNode buildEXPR(Symbol s) {
-		return build(s.getChild(0));
+		if (s.getNumChildren() == 1)
+			return build(s.getChild(0));
+		else
+			return buildQUOTE(s.getChild(1));
 	}
 
 	private ASTNode buildQUOTE(Symbol s) {
-		return null;
+		ASTNode n = new ASTNode(ASTNodeType.QUOTE);
+		Symbol child = s.getChild(0);
+		if (child.getSymbolType() == SymbolType.LIST) {
+			n.setValue("List");
+			Symbol ss = child.getChild(1);
+			while (ss.getNumChildren() > 0) {
+				n.addChild(build(ss.getChild(0)));
+				ss = ss.getChild(1);
+			}
+		} else {
+			n.setValue("Non-List");
+			n.addChild(build(child));
+		}
+		return n;
 	}
 
 	private ASTNode buildLIST(Symbol s) {

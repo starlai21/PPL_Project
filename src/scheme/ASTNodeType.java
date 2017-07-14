@@ -12,6 +12,7 @@ public enum ASTNodeType {
 	
 	/** AST node representing a function (lambda expression) */
 	//FUNCTION,
+	QUOTE,
 	
 	/** AST node representing a formal parameter to a function */
 	FORMAL_PARAM,
